@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-
+// comment
 public class movingCube : MonoBehaviour
 {
     public float moveDistance = 2f;   // distance per step
