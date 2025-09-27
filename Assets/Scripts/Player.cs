@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int id;
+    public int id = 0;
     public string playerName = "Player";
     public float money = 0;
+
+    public int currentTileIndex = 0;
     // convenience
     public override string ToString()
     {
-        return $"[{id}] {playerName} (H, Score: {money})";
+        return $"{playerName} (H, Score: {money})";
     }
 }

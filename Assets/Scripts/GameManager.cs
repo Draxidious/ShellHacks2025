@@ -4,7 +4,6 @@ using UnityEngine;
 
 /// <summary>
 /// Scene-level GameManager. Attach this to a GameObject in your starting scene.
-/// Provides basic data for up to 3 players and simple helper methods.
 /// </summary>
 public class GameManager : MonoBehaviour
 {
@@ -15,9 +14,14 @@ public class GameManager : MonoBehaviour
     
     [Header("Players")]
     [Tooltip("Basic player data for up to 4 players. OnValidate will ensure there are 4 entries.")]
-    public List<Player> players = new List<Player>();
+    public static List<Player> players = new List<Player>();
 
     [Header("Game Settings")]
+
+    // Event-based API: request that a player piece be moved. Parameters: playerIndex (0-based), boardSpaceIndex (0-based)
+    public static Action<int, int> OnPlayerMoveRequested;
+    public static Action<Player> OnPlayerAdded;
+
     public bool dontDestroyOnLoad = false;
 
     public int debugPlayerIndex = 0;
@@ -41,10 +45,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-    }
 
-    private void Start()
-    {
         if (addTestPlayers)
         {
             for (int i = 0; i < maxPlayers; i++)
@@ -59,16 +60,18 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    public void RequestMovePlayer(int playerIndex, int boardSpaceIndex)
+    {
+        OnPlayerMoveRequested?.Invoke(playerIndex, boardSpaceIndex);
+    }
 
     public void AddPlayer(Player newPlayer)
     {
-        if (players.Count >= maxPlayers)
-        {
-            Debug.LogWarning("Maximum number of players reached. Cannot add more players.");
-            return;
-        }
+        OnPlayerAdded?.Invoke(newPlayer);
         players.Add(newPlayer);
     }
+
+
     private void Update()
     {
         if (movePlayerForward && movePlayerSpaces != 0)
@@ -88,15 +91,6 @@ public class GameManager : MonoBehaviour
     }
     
     #endregion Public API
-
-    // Event-based API: request that a player piece be moved. Parameters: playerIndex (0-based), boardSpaceIndex (0-based)
-    public static Action<int, int> OnPlayerMoveRequested;
-
-    // Call this to request a move. This will notify any subscribers (e.g., BoardManager).
-    public void RequestMovePlayer(int playerIndex, int boardSpaceIndex)
-    {
-        OnPlayerMoveRequested?.Invoke(playerIndex, boardSpaceIndex);
-    }
 
     [ContextMenu("Print Players To Console")]
     public void DebugPrintPlayers()

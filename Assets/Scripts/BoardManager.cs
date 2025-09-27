@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class BoardManager : MonoBehaviour
 {
@@ -26,6 +27,11 @@ public class BoardManager : MonoBehaviour
     {
         Debug.Log("BoardManager Start");
         GetTilesAndPieces();
+        for (int i = 0; i < playerPieces.Count; i++)
+        {
+            MovePlayerPiece(i, 0);
+        }
+        GameManager.OnPlayerAdded += AddPlayerPiece;
     }
 
     private void Awake()
@@ -38,6 +44,11 @@ public class BoardManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void AddPlayerPiece(Player player)
+    {
+        playerPieces[player.id - 1].transform.position = Tiles[0].piecePlacement.position;
     }
 
     private void OnEnable()
@@ -64,7 +75,7 @@ public class BoardManager : MonoBehaviour
             return;
         }
         Debug.Log($"tiels count: {Tiles.Count}");
-        int newPosition = (playerIndex + spaceMovement) % Tiles.Count;
+        int newPosition = (GameManager.players[playerIndex].currentTileIndex + spaceMovement) % Tiles.Count;
         playerPieces[playerIndex].transform.position = Tiles[newPosition].piecePlacement.position;
     }
 
