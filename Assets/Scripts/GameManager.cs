@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
                 Player newPlayer = new Player
                 {
                     id = i + 1,
+                    profession = "Unemployed",
                     playerName = $"Player {i + 1}",
                     money = 0
                 };
