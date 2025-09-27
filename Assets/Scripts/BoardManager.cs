@@ -78,7 +78,14 @@ public class BoardManager : MonoBehaviour
         int currentPosition = GameManager.players[playerIndex].currentTileIndex;
         int newPosition = (currentPosition + spaceMovement) % Tiles.Count;
         GameManager.players[playerIndex].currentTileIndex = newPosition;
-        playerPieces[playerIndex].transform.position = Tiles[newPosition].GetPiecePlacementPosition(playerIndex);
+
+        Vector3 targetPosition = Tiles[newPosition].GetPiecePlacementPosition(playerIndex);
+        playerPieces[playerIndex].GetComponent<MovingBehavior>().StartCoroutine(
+            playerPieces[playerIndex].GetComponent<MovingBehavior>().HopToPosition(
+                targetPosition
+            )
+        );
+        playerPieces[playerIndex].transform.position = targetPosition;
     }
 
     private void HandlePlayerMoveRequested(int playerIndex, int boardSpaceIndex)
