@@ -148,8 +148,8 @@ PlayerSettings:
   - {fileID: 11400000, guid: 93ea72d02692ec74f96ccb9415077597, type: 2}
   - {fileID: 11400000, guid: c0228120aed33f64a82aebb437fa7434, type: 2}
   - {fileID: 11400000, guid: 0a7307eee8df2404f82c393ae047fca7, type: 2}
-  - {fileID: 6455825509589654273, guid: 38a4eee029157a44aa22e446a493b90a, type: 2}
-  - {fileID: 8860158354852369252, guid: 766ff27917cb5e74f8e4dbe104e76d00, type: 2}
+  - {fileID: 4886763981952529425, guid: 38a4eee029157a44aa22e446a493b90a, type: 2}
+  - {fileID: 2179832129537787122, guid: 766ff27917cb5e74f8e4dbe104e76d00, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -538,8 +538,12 @@ PlayerSettings:
   m_BuildTargetGraphicsJobs:
   - m_BuildTarget: MacStandaloneSupport
     m_GraphicsJobs: 1
+  - m_BuildTarget: AndroidPlayer
+    m_GraphicsJobs: 1
   m_BuildTargetGraphicsJobMode:
   - m_BuildTarget: MacStandaloneSupport
+    m_GraphicsJobMode: 1
+  - m_BuildTarget: AndroidPlayer
     m_GraphicsJobMode: 1
   m_BuildTargetGraphicsAPIs:
   - m_BuildTarget: iOSSupport
