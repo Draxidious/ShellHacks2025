@@ -1,22 +1,22 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.Services.Lobbies.Models;
 
 public class BoardManager : MonoBehaviour
 {
     // Singleton instance for easy global access
     public static BoardManager Instance { get; private set; }
 
-    #region Board variables
-    public List<GameObject> boardSpaceObjects;
+    #region Board Tiles
+    public GameObject TileObjects;
 
-    public List<Transform> boardSpacePositions;
+    public GameObject PieceObjects;
+    public List<Tile> Tiles;
 
     #endregion
 
     #region Player variables
-    public List<GameObject> playerPieces;
+    List<GameObject> playerPieces;
 
     #endregion
 
@@ -24,7 +24,8 @@ public class BoardManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GetBoardSpacePositions();
+        Debug.Log("BoardManager Start");
+        GetTilesAndPieces();
     }
 
     private void Awake()
@@ -57,14 +58,14 @@ public class BoardManager : MonoBehaviour
 
     public void MovePlayerPiece(int playerIndex, int spaceMovement)
     {
-        if (playerIndex < playerPieces.Count &&  playerIndex + spaceMovement < boardSpacePositions.Count)
+        if (playerIndex > playerPieces.Count)
         {
-            playerPieces[playerIndex].transform.position = boardSpacePositions[playerIndex + spaceMovement].position;
+            Debug.LogError($"Player index {playerIndex} is out of range for player pieces list.");
+            return;
         }
-        else
-        {
-            playerPieces[playerIndex].transform.position = boardSpacePositions[playerIndex + spaceMovement - boardSpacePositions.Count].position;
-        }
+        Debug.Log($"tiels count: {Tiles.Count}");
+        int newPosition = (playerIndex + spaceMovement) % Tiles.Count;
+        playerPieces[playerIndex].transform.position = Tiles[newPosition].piecePlacement.position;
     }
 
     private void HandlePlayerMoveRequested(int playerIndex, int boardSpaceIndex)
@@ -78,14 +79,20 @@ public class BoardManager : MonoBehaviour
     //     //boardSpaceObjects[tileIndex].GetComponent<TileInformation>().GetPiecePosition();
     // }
 
-    
-    void GetBoardSpacePositions()
-    {
-        boardSpacePositions = new List<Transform>();
 
-        foreach (GameObject space in boardSpaceObjects)
+    void GetTilesAndPieces()
+    {
+        // Get all Tile components in children of TileObjects
+        Tile[] tileArray = TileObjects.GetComponentsInChildren<Tile>();
+
+        // Convert to list and store in the Tiles field
+        Tiles = new List<Tile>(tileArray);
+
+        // Get all player pieces in children of PieceObjects
+        playerPieces = new List<GameObject>();
+        foreach (Transform child in PieceObjects.transform)
         {
-            boardSpacePositions.Add(space.transform);
+            playerPieces.Add(child.gameObject);
         }
     }
 }
