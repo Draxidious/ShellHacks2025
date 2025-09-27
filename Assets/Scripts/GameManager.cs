@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     public static Action<int, int> OnPlayerMoveRequested;
     public static Action<Player> OnPlayerAdded;
 
+    public static Action OnTurnChanged;
+
     public bool dontDestroyOnLoad = false;
 
     public int debugPlayerIndex = 0;
@@ -34,6 +36,10 @@ public class GameManager : MonoBehaviour
     public bool movePlayerForward = false;
 
     public bool addTestPlayers = true;
+
+    [Header("Game Information")]
+
+    public int currentTurnPlayerIndex = -1;
 
     void Awake()
     {
@@ -63,7 +69,15 @@ public class GameManager : MonoBehaviour
                 };
                 AddPlayer(newPlayer);
             }
+            
         }
+        
+    }
+
+    // We want to start the next turn after everything is awake
+    void Start()
+    {
+        NextTurn();
     }
     public void RequestMovePlayer(int playerIndex, int boardSpaceIndex)
     {
@@ -74,6 +88,13 @@ public class GameManager : MonoBehaviour
     {
         OnPlayerAdded?.Invoke(newPlayer);
         players.Add(newPlayer);
+    }
+
+    public void NextTurn()
+    {
+        Debug.Log("It is next turn");
+        currentTurnPlayerIndex = (currentTurnPlayerIndex + 1) % players.Count;
+        OnTurnChanged?.Invoke();
     }
 
 
