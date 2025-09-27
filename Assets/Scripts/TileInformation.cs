@@ -26,12 +26,12 @@ public class TileInformation : MonoBehaviour
 
     private void OnEnable()
     {
-        BoardManager.RequestTileTransform += GetPiecePosition();
+        //BoardManager.RequestTileTransform += GetPiecePosition();
     }
 
     private void OnDisable()
     {
-        BoardManager.RequestTileTransform -= GetPiecePosition();
+        //BoardManager.RequestTileTransform -= GetPiecePosition();
     }
 
 
