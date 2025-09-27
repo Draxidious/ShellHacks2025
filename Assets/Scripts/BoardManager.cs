@@ -1,13 +1,16 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class BoardManager : MonoBehaviour
 {
     #region Board variables
-    Public List<Transform> boardSpacePositions;
+    public List<Transform> boardSpacePositions;
+
+    #endregion
     
     #region Player variables
-    Public List<GameObject> playerPieces;
-    
+    public List<GameObject> playerPieces;
+
     #endregion
 
 
