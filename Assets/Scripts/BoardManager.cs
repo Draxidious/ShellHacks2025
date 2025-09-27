@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class BoardManager : MonoBehaviour
 {
@@ -48,7 +47,8 @@ public class BoardManager : MonoBehaviour
 
     public void AddPlayerPiece(Player player)
     {
-        playerPieces[player.id - 1].transform.position = Tiles[0].piecePlacement.position;
+        int playerIndex = player.id - 1;
+        playerPieces[playerIndex].transform.position = Tiles[0].GetPiecePlacementPosition(playerIndex);
     }
 
     private void OnEnable()
@@ -67,6 +67,7 @@ public class BoardManager : MonoBehaviour
 
     }
 
+    // player index is player id - 1
     public void MovePlayerPiece(int playerIndex, int spaceMovement)
     {
         if (playerIndex > playerPieces.Count)
@@ -74,9 +75,10 @@ public class BoardManager : MonoBehaviour
             Debug.LogError($"Player index {playerIndex} is out of range for player pieces list.");
             return;
         }
-        Debug.Log($"tiels count: {Tiles.Count}");
-        int newPosition = (GameManager.players[playerIndex].currentTileIndex + spaceMovement) % Tiles.Count;
-        playerPieces[playerIndex].transform.position = Tiles[newPosition].piecePlacement.position;
+        int currentPosition = GameManager.players[playerIndex].currentTileIndex;
+        int newPosition = (currentPosition + spaceMovement) % Tiles.Count;
+        GameManager.players[playerIndex].currentTileIndex = newPosition;
+        playerPieces[playerIndex].transform.position = Tiles[newPosition].GetPiecePlacementPosition(playerIndex);
     }
 
     private void HandlePlayerMoveRequested(int playerIndex, int boardSpaceIndex)
