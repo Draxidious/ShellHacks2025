@@ -36,7 +36,6 @@ public class DiceRoller : MonoBehaviour
     public void RollDice()
     {
         StartCoroutine(RollDiceRoutine());
-        GameManager.Instance.DiceRolled(sum);
     }
 
     private IEnumerator RollDiceRoutine()
@@ -82,7 +81,8 @@ public class DiceRoller : MonoBehaviour
             yield return null;
         }
 
-        sum = result1 + result2;
+        int sum = result1 + result2;
+        GameManager.Instance.DiceRolled(sum);
         Debug.Log($"You rolled: {result1} + {result2} = {sum}");
     }
 
@@ -92,12 +92,12 @@ public class DiceRoller : MonoBehaviour
 
         switch (value)
         {
-            case 1: localDir = Vector3.forward; break;
-            case 2: localDir = Vector3.left; break;
-            case 3: localDir = Vector3.back; break;
-            case 4: localDir = Vector3.right; break;
-            case 5: localDir = Vector3.up; break;
-            case 6: localDir = Vector3.down; break;
+            case 1: localDir = Vector3.forward; break;   // +Z
+            case 2: localDir = Vector3.up; break;        // +Y
+            case 3: localDir = Vector3.left; break;      // -X
+            case 4: localDir = Vector3.right; break;     // +X
+            case 5: localDir = Vector3.down; break;      // -Y
+            case 6: localDir = Vector3.back; break;      // -Z
         }
 
         die.rotation = Quaternion.FromToRotation(localDir, Vector3.up);

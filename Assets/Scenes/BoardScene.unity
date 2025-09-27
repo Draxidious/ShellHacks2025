@@ -475,10 +475,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6871990578716197019, guid: 3a83d1b770fe0e34ea0ec9f13369f5fd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2088333361}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a83d1b770fe0e34ea0ec9f13369f5fd, type: 3}
 --- !u!1 &765521684
 GameObject:
@@ -1270,6 +1267,7 @@ MonoBehaviour:
   liftHeight: 1
   rollDuration: 0.5
   spinSpeed: 1800
+  sum: 0
 --- !u!1001 &1517122064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2201,29 +2199,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 349019269015683813, guid: addf27dac1ba94b4085c9210de4d4581, type: 3}
   m_PrefabInstance: {fileID: 2048503162}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2088333356 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6871990578716197019, guid: 3a83d1b770fe0e34ea0ec9f13369f5fd, type: 3}
-  m_PrefabInstance: {fileID: 713273819}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2088333360 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6059003587714193953, guid: 3a83d1b770fe0e34ea0ec9f13369f5fd, type: 3}
   m_PrefabInstance: {fileID: 713273819}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2088333361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088333356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aab4e4da67fb33448fdea6a6b75c759, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RollDie
-  sideToFaceUp: 3
 --- !u!4 &2055931857229469881
 Transform:
   m_ObjectHideFlags: 0
