@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +21,6 @@ public class GameManager : MonoBehaviour
         public bool isTurnActive = false;
         public float score = 0;
         public Vector3 spawnPosition = Vector3.zero;
-        public GameObject avatarPrefab;
 
         // convenience
         public override string ToString()
@@ -37,6 +37,10 @@ public class GameManager : MonoBehaviour
     public bool dontDestroyOnLoad = false;
 
     [SerializeField] float startScore = 1000f;
+
+    public int debugPlayerIndex = 0;
+    public int debugMove = 0;
+    public bool debugMovement = false;
 
     void Awake()
     {
@@ -62,11 +66,15 @@ public class GameManager : MonoBehaviour
     {
         ResetPlayers();
     }
-
     private void Update()
     {
-        
+        if (debugMovement && debugMove != 0)
+        {
+            debugMovement = false;
+            RequestMovePlayer(debugPlayerIndex, (int)debugMove);
+        }
     }
+
 
     // Ensure there are exactly 3 player entries (used in editor and at runtime)
     private void EnsureThreePlayers()
@@ -139,6 +147,15 @@ public class GameManager : MonoBehaviour
     public void TurnHandler()
     {
         
+    }
+
+    // Event-based API: request that a player piece be moved. Parameters: playerIndex (0-based), boardSpaceIndex (0-based)
+    public static Action<int, int> OnPlayerMoveRequested;
+
+    // Call this to request a move. This will notify any subscribers (e.g., BoardManager).
+    public void RequestMovePlayer(int playerIndex, int boardSpaceIndex)
+    {
+        OnPlayerMoveRequested?.Invoke(playerIndex, boardSpaceIndex);
     }
 
     // Small debug helper to print all players
