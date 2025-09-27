@@ -72,11 +72,11 @@ public class BoardManager : MonoBehaviour
         MovePlayerPiece(playerIndex, boardSpaceIndex);
     }
     public static Action<int> OnRequestTileTransform;
-    public Transform RequestTileTransform(int tileIndex)
-    {
-        OnRequestTileTransform?.Invoke(tileIndex);
-        //boardSpaceObjects[tileIndex].GetComponent<TileInformation>().GetPiecePosition();
-    }
+    // public Transform RequestTileTransform(int tileIndex)
+    // {
+    //     OnRequestTileTransform?.Invoke(tileIndex);
+    //     //boardSpaceObjects[tileIndex].GetComponent<TileInformation>().GetPiecePosition();
+    // }
 
     
     void GetBoardSpacePositions()
