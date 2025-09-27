@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
 {
     // Optional singleton instance (useful if you want a single manager across scenes)
     public static GameManager Instance { get; private set; }
+    HashSet<string> jobSet = new HashSet<string>
+    {
+        "Software Engineer",
+        "Doctor"
+    };
 
     public const int maxPlayers = 4;
     
