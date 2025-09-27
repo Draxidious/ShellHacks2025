@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
     // Event-based API: request that a player piece be moved. Parameters: playerIndex (0-based), boardSpaceIndex (0-based)
     public static Action<int, int> OnPlayerMoveRequested;
     public static Action<Player> OnPlayerAdded;
-
     public static Action OnTurnChanged;
+    public static Action<int> OnDiceRolled;
 
     public bool dontDestroyOnLoad = false;
 
@@ -89,6 +89,11 @@ public class GameManager : MonoBehaviour
     {
         OnPlayerAdded?.Invoke(newPlayer);
         players.Add(newPlayer);
+    }
+
+    public void DiceRolled(int sum)
+    {
+        OnDiceRolled?.Invoke(sum);
     }
 
     public void NextTurn()

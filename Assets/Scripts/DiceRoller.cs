@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class DiceRoller : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class DiceRoller : MonoBehaviour
     public float rollDuration = 0.5f;   // Duration to lift/drop
     public float spinSpeed = 1800f;     // Degrees per second
 
+    public int sum = 0;
     void Start()
     {
         die1StartPos = die1.position;
@@ -34,6 +36,7 @@ public class DiceRoller : MonoBehaviour
     public void RollDice()
     {
         StartCoroutine(RollDiceRoutine());
+        GameManager.Instance.DiceRolled(sum);
     }
 
     private IEnumerator RollDiceRoutine()
@@ -79,7 +82,7 @@ public class DiceRoller : MonoBehaviour
             yield return null;
         }
 
-        int sum = result1 + result2;
+        sum = result1 + result2;
         Debug.Log($"You rolled: {result1} + {result2} = {sum}");
     }
 

@@ -24,17 +24,19 @@ public class BoardManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GameManager.OnPlayerAdded += AddPlayerPiece;
         Debug.Log("BoardManager Start");
         GetTilesAndPieces();
         for (int i = 0; i < playerPieces.Count; i++)
         {
             MovePlayerPiece(i, 0);
         }
-        GameManager.OnPlayerAdded += AddPlayerPiece;
+        
     }
 
     private void Awake()
     {
+        GameManager.OnDiceRolled += HandleDiceRolled;
         if (Instance == null)
         {
             Instance = this;
@@ -49,6 +51,18 @@ public class BoardManager : MonoBehaviour
     {
         int playerIndex = player.id - 1;
         playerPieces[playerIndex].transform.position = Tiles[0].GetPiecePlacementPosition(playerIndex);
+    }
+    public void HandleDiceRolled(int sum)
+    {
+        StartCoroutine(MovePlayerByDiceAmount(sum));
+    }
+    public System.Collections.IEnumerator MovePlayerByDiceAmount(int sum)
+    {
+        // wait for a second
+        yield return new WaitForSeconds(2);
+        // Move the current player piece by the sum
+        Debug.Log($"Moving player {GameManager.Instance.currentTurnPlayerIndex} by {sum} spaces.");
+        MovePlayerPiece(GameManager.Instance.currentTurnPlayerIndex, sum);
     }
 
     private void OnEnable()
