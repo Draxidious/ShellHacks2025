@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     public GameObject buyPropertyPanel;
+    public GameObject payThePricePanel;
     public GameObject rollDicePanel;
 
     public bool buyProperty = false;
@@ -43,7 +44,7 @@ public class GameState : MonoBehaviour
             GameManager.Instance.UpdatePlayerMoney(currentPlayer.id, - (int)rentAmount);
             GameManager.Instance.UpdatePlayerMoney(owner.id, (int)rentAmount);
             Debug.Log($"{currentPlayer.playerName} paid ${rentAmount} in rent to {owner.playerName} for landing on {currentTile.tileName}.");
-            GameManager.Instance.NextTurn();
+            StartCoroutine(ShowPricePaidPanel());
             return;
         }
         buyPropertyPanel.SetActive(true);
@@ -51,14 +52,24 @@ public class GameState : MonoBehaviour
         currentTile = tile;
     }
 
+    private System.Collections.IEnumerator ShowPricePaidPanel()
+    {
+        rollDicePanel.SetActive(false);
+        payThePricePanel.SetActive(true);
+        yield return new WaitForSeconds(2); // Display for 2 seconds
+        payThePricePanel.SetActive(false);
+        rollDicePanel.SetActive(true);
+        GameManager.Instance.NextTurn();
+    }
+
     public void Update()
     {
-        if(buyProperty)
+        if (buyProperty)
         {
             PropertyBought();
             buyProperty = false;
         }
-        else if(declineProperty)
+        else if (declineProperty)
         {
             PropertyDeclined();
             declineProperty = false;
@@ -74,7 +85,7 @@ public class GameState : MonoBehaviour
         }
         buyPropertyPanel.SetActive(false);
         rollDicePanel.SetActive(true);
-        currentTile.playerOwnerId = GameManager.Instance.currentTurnPlayerIndex;
+        currentTile.setOwner(GameManager.Instance.currentTurnPlayerIndex);
 
         GameManager.Instance.UpdatePlayerMoney(GameManager.Instance.currentTurnPlayerIndex + 1, -currentTile.propertyCost);
         Debug.Log($"{GameManager.players[GameManager.Instance.currentTurnPlayerIndex].playerName} bought {currentTile.tileName} for ${currentTile.propertyCost}.");
