@@ -6,6 +6,9 @@ public class GameState : MonoBehaviour
     public GameObject payThePricePanel;
     public GameObject rollDicePanel;
 
+    public GameObject triviaPanel;
+    public GameObject eventPanel;
+
     public bool buyProperty = false;
     public bool declineProperty = false;
 
