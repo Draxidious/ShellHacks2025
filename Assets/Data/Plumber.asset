@@ -13,5 +13,14 @@ MonoBehaviour:
   m_Name: Plumber
   m_EditorClassIdentifier: Assembly-CSharp::JobData
   jobName: 
-  communityChestCards: []
-  triviaQuestions: []
+  communityChestCards:
+  - description: 'hello
+
+'
+    action: 0
+    amount: 0
+  triviaQuestions:
+  - question: 'goodbye
+
+'
+    answer: '"yo"'
