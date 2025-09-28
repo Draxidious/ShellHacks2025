@@ -9,11 +9,6 @@ public class GameManager : MonoBehaviour
 {
     // Optional singleton instance (useful if you want a single manager across scenes)
     public static GameManager Instance { get; private set; }
-    HashSet<string> jobSet = new HashSet<string>
-    {
-        "Software Engineer",
-        "Doctor"
-    };
 
     public const int maxPlayers = 2;
 
@@ -46,6 +41,7 @@ public class GameManager : MonoBehaviour
     [Header("Game Information")]
 
     public int currentTurnPlayerIndex = -1;
+    public string sampleTriviaQuestion;
 
     void Awake()
     {

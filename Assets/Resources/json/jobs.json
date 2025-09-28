@@ -1,0 +1,201 @@
+{
+  "Jobs": [
+    {
+      "Name": "Business Man",
+      "Events": [
+        {
+          "Description": "Business people invest money to start companies. You open a new store.",
+          "Amount": 100,
+          "Type": "Collect"
+        },
+        {
+          "Description": "Business people hold meetings to plan with others. You lead a big meeting.",
+          "Amount": 50,
+          "Type": "Collect"
+        },
+        {
+          "Description": "Business people read charts and graphs to track progress. You study your sales report.",
+          "Amount": 20,
+          "Type": "Pay"
+        },
+        {
+          "Description": "Business people hire workers to help run companies. You hire a new helper.",
+          "Amount": 30,
+          "Type": "Pay"
+        },
+        {
+          "Description": "Businessmen sell products or services. Your new product is a hit.",
+          "Amount": 80,
+          "Type": "Collect"
+        },
+        {
+          "Description": "Businessmen wear suits to look professional. You buy a new suit.",
+          "Amount": 40,
+          "Type": "Pay"
+        },
+        {
+          "Description": "Businessmen make deals with other companies. You close a big deal.",
+          "Amount": 120,
+          "Type": "Collect"
+        },
+        {
+          "Description": "Businessmen work in offices downtown. You pay office rent.",
+          "Amount": 50,
+          "Type": "Pay"
+        }
+      ],
+      "Trivia": [
+        {
+          "Question": "What do business people invest to start companies?",
+          "Answer": "Money",
+          "Options": ["Money", "Time", "Books", "Shoes"]
+        },
+        {
+          "Question": "What do business people hold to plan with others?",
+          "Answer": "Meetings",
+          "Options": ["Meetings", "Concerts", "Vacations", "Picnics"]
+        },
+        {
+          "Question": "What do business people read to track progress?",
+          "Answer": "Charts and graphs",
+          "Options": ["Charts and graphs", "Novels", "Magazines", "Comics"]
+        },
+        {
+          "Question": "Who do business people hire to help run their companies?",
+          "Answer": "Workers",
+          "Options": ["Workers", "Neighbors", "Tourists", "Children"]
+        },
+        {
+          "Question": "What do business people sell to make money?",
+          "Answer": "Products or services",
+          "Options": ["Products or services", "Houses", "Pets", "Vacations"]
+        },
+        {
+          "Question": "What do business people wear to look professional?",
+          "Answer": "Suits",
+          "Options": ["Suits", "Pajamas", "Swimwear", "Costumes"]
+        },
+        {
+          "Question": "What do business people make with other companies?",
+          "Answer": "Deals",
+          "Options": ["Deals", "Paintings", "Recipes", "Songs"]
+        },
+        {
+          "Question": "Where do businessmen often work?",
+          "Answer": "Offices",
+          "Options": ["Offices", "Farms", "Beaches", "Airplanes"]
+        }
+      ]
+    },
+    {
+      "Name": "Electrician",
+      "Events": [
+        { "Description": "Electricians fix broken lights and wiring. You repair a streetlight.", "Amount": 40, "Type": "Collect" },
+        { "Description": "Electricians wear gloves to stay safe. You buy new safety gear.", "Amount": 20, "Type": "Pay" },
+        { "Description": "Electricians use wires to carry electricity. You replace old wires.", "Amount": 30, "Type": "Pay" },
+        { "Description": "Electricians install outlets in homes. You finish a job at a house.", "Amount": 60, "Type": "Collect" },
+        { "Description": "Electricians carry tool belts with screwdrivers and pliers. You buy new tools.", "Amount": 25, "Type": "Pay" },
+        { "Description": "Electricians climb ladders to reach high wires. You climb a ladder at work.", "Amount": 30, "Type": "Collect" },
+        { "Description": "Electricians bring power to new buildings. You connect electricity to a school.", "Amount": 80, "Type": "Collect" },
+        { "Description": "Electricians must turn off the power before fixing wires. You forget and get shocked!", "Amount": 50, "Type": "Pay" }
+      ],
+      "Trivia": [
+        {
+          "Question": "What do electricians fix when it breaks?",
+          "Answer": "Lights and wiring",
+          "Options": ["Lights and wiring", "Furniture", "Shoes", "Clocks"]
+        },
+        {
+          "Question": "What do electricians wear to stay safe?",
+          "Answer": "Gloves",
+          "Options": ["Gloves", "Scarves", "Sandals", "Hats"]
+        },
+        {
+          "Question": "What do electricians use to carry electricity?",
+          "Answer": "Wires",
+          "Options": ["Wires", "Pipes", "Ropes", "Hoses"]
+        },
+        {
+          "Question": "What do electricians install so people can plug things in?",
+          "Answer": "Outlets",
+          "Options": ["Outlets", "Windows", "Doors", "Chairs"]
+        },
+        {
+          "Question": "What do electricians carry to hold their tools?",
+          "Answer": "Tool belts",
+          "Options": ["Tool belts", "Backpacks", "Suitcases", "Pockets"]
+        },
+        {
+          "Question": "What do electricians climb to reach high places?",
+          "Answer": "Ladders",
+          "Options": ["Ladders", "Trees", "Stairs", "Poles"]
+        },
+        {
+          "Question": "Who brings power to new buildings?",
+          "Answer": "Electricians",
+          "Options": ["Electricians", "Plumbers", "Chefs", "Artists"]
+        },
+        {
+          "Question": "What should electricians do before fixing wires?",
+          "Answer": "Turn off the power",
+          "Options": ["Turn off the power", "Sing a song", "Call friends", "Open windows"]
+        }
+      ]
+    },
+    {
+      "Name": "Plumber",
+      "Events": [
+        { "Description": "Plumbers fix leaky pipes. You repair a pipe at the school.", "Amount": 50, "Type": "Collect" },
+        { "Description": "Plumbers use wrenches as tools. You buy a new wrench.", "Amount": 20, "Type": "Pay" },
+        { "Description": "Plumbers unclog sinks and drains. You clear a clogged sink.", "Amount": 30, "Type": "Collect" },
+        { "Description": "Plumbers install toilets in bathrooms. You finish a new job.", "Amount": 80, "Type": "Collect" },
+        { "Description": "Plumbers work with water pipes underground. You dig to reach a pipe.", "Amount": 40, "Type": "Pay" },
+        { "Description": "Plumbers wear boots to stay dry. You buy new boots.", "Amount": 25, "Type": "Pay" },
+        { "Description": "Plumbers repair hot water heaters. You fix a family’s heater.", "Amount": 60, "Type": "Collect" },
+        { "Description": "Plumbers stop floods by fixing pipes quickly. You save the day!", "Amount": 100, "Type": "Collect" }
+      ],
+      "Trivia": [
+        {
+          "Question": "What do plumbers fix when it leaks?",
+          "Answer": "Pipes",
+          "Options": ["Pipes", "Shoes", "Walls", "Books"]
+        },
+        {
+          "Question": "What tool do plumbers often use?",
+          "Answer": "Wrench",
+          "Options": ["Wrench", "Fork", "Brush", "Hammer"]
+        },
+        {
+          "Question": "What do plumbers unclog in kitchens or bathrooms?",
+          "Answer": "Sinks and drains",
+          "Options": ["Sinks and drains", "Chimneys", "Windows", "Ovens"]
+        },
+        {
+          "Question": "What do plumbers install in bathrooms?",
+          "Answer": "Toilets",
+          "Options": ["Toilets", "Desks", "Beds", "Mirrors"]
+        },
+        {
+          "Question": "What do plumbers sometimes dig to reach?",
+          "Answer": "Water pipes",
+          "Options": ["Water pipes", "Treasure", "Roots", "Worms"]
+        },
+        {
+          "Question": "What do plumbers wear to keep dry?",
+          "Answer": "Boots",
+          "Options": ["Boots", "Gloves", "Hats", "Shorts"]
+        },
+        {
+          "Question": "What do plumbers repair to give hot showers?",
+          "Answer": "Water heaters",
+          "Options": ["Water heaters", "Air conditioners", "Televisions", "Ovens"]
+        },
+        {
+          "Question": "What do plumbers stop when pipes break?",
+          "Answer": "Floods",
+          "Options": ["Floods", "Fires", "Storms", "Earthquakes"]
+        }
+      ]
+    }
+  ]
+}
