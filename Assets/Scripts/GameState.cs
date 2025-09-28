@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using UnityEngine;
 
 public class GameState : MonoBehaviour
@@ -12,6 +13,10 @@ public class GameState : MonoBehaviour
     public bool buyProperty = false;
     public bool declineProperty = false;
 
+    public bool testTrivia = false;
+
+    public bool testEvent = false;
+
     private Tile currentTile; // Track the tile the player landed on
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -19,6 +24,9 @@ public class GameState : MonoBehaviour
         GameManager.OnPropertyLandedOn += PropertyLandedOn;
         GameManager.OnTriviaLandedOn += TriviaLandedOn;
         GameManager.OnEventLandedOn += EventLandedOn;
+
+        triviaPanel.SetActive(false);
+        eventPanel.SetActive(false);
     }
 
     public void PropertyLandedOn(Tile tile)
@@ -44,7 +52,7 @@ public class GameState : MonoBehaviour
                 // Handle bankruptcy or other logic here
                 return;
             }
-            GameManager.Instance.UpdatePlayerMoney(currentPlayer.id, - (int)rentAmount);
+            GameManager.Instance.UpdatePlayerMoney(currentPlayer.id, -(int)rentAmount);
             GameManager.Instance.UpdatePlayerMoney(owner.id, (int)rentAmount);
             Debug.Log($"{currentPlayer.playerName} paid ${rentAmount} in rent to {owner.playerName} for landing on {currentTile.tileName}.");
             StartCoroutine(ShowPricePaidPanel());
@@ -77,6 +85,18 @@ public class GameState : MonoBehaviour
             PropertyDeclined();
             declineProperty = false;
         }
+
+        if (testTrivia)
+        {
+            testTrivia = false;
+            StartCoroutine(ShowTriviaPanel());
+        }
+
+        if (testEvent)
+        {
+            testEvent = false;
+            StartCoroutine(ShowEventPanel());
+        }
     }
 
     public void PropertyBought()
@@ -105,9 +125,25 @@ public class GameState : MonoBehaviour
     public void TriviaLandedOn()
     {
         Debug.Log("Trivia Landed On - TileManager");
+        triviaPanel.SetActive(true);
     }
     public void EventLandedOn()
     {
         Debug.Log("Event Landed On - TileManager");
+        eventPanel.SetActive(true);
+    }
+
+    private System.Collections.IEnumerator ShowTriviaPanel()
+    {
+        triviaPanel.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        triviaPanel.SetActive(false);
+    }
+
+    private System.Collections.IEnumerator ShowEventPanel()
+    {
+        eventPanel.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        eventPanel.SetActive(false);
     }
 }
