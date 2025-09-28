@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum CardAction
@@ -23,4 +24,5 @@ public class TriviaQuestion
     [TextArea(2, 3)]
     public string question;
     public string answer;
+    public List<string> options;
 }

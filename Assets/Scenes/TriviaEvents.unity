@@ -858,6 +858,8 @@ MonoBehaviour:
   TileObjects: {fileID: 246109600}
   PieceObjects: {fileID: 1233752002}
   Tiles: []
+  initDelaySeconds: 3
+  moveDelaySeconds: 2
 --- !u!4 &235939517
 Transform:
   m_ObjectHideFlags: 0
@@ -1206,8 +1208,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2044,8 +2046,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3810,8 +3812,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7920,12 +7922,20 @@ MonoBehaviour:
   gameOver: 0
   triviaPanel: {fileID: 212563652}
   eventPanel: {fileID: 1457248424}
-  triviaLabel: {fileID: 0}
-  eventLabel: {fileID: 0}
-  testTrivia: 1
-  testEvent: 1
+  triviaLabel: {fileID: 610602785}
+  eventLabel: {fileID: 660846593}
+  Choice1Panel: {fileID: 1465102291}
+  Choice2Panel: {fileID: 1515340773}
+  Choice3Panel: {fileID: 1890302032}
+  Choice4Panel: {fileID: 104624180}
+  Choice1Label: {fileID: 525767609}
+  Choice2Label: {fileID: 1997933001}
+  Choice3Label: {fileID: 368303011}
+  Choice4Label: {fileID: 893575712}
+  testTrivia: 0
+  testEvent: 0
   chooseCareer: 0
-  selectedCareer: Unemployed
+  selectedCareer: Plumber
 --- !u!1001 &1644071964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9883,8 +9893,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -36,7 +36,13 @@ public class JobsDataRepository : MonoBehaviour
         public int Amount;
         public string Type;
     }
-    [Serializable] private class TriviaJson { public string Question; public string Answer; }
+    [Serializable]
+    private class TriviaJson
+    {
+        public string Question;
+        public string Answer;
+        public List<string> Options;
+    }
 
     private void Awake()
     {
@@ -99,7 +105,8 @@ public class JobsDataRepository : MonoBehaviour
                     trList.Add(new TriviaQuestion
                     {
                         question = t.Question,
-                        answer = t.Answer
+                        answer = t.Answer,
+                        options = t.Options,
                     });
                 }
             }

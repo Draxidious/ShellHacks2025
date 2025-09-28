@@ -14,17 +14,31 @@ public class GameState : MonoBehaviour
     public bool declineProperty = false;
 
     public bool gameOver = false;
+
     public GameObject triviaPanel;
     public GameObject eventPanel;
     public TMP_Text triviaLabel;
     public TMP_Text eventLabel;
+
+    public GameObject Choice1Panel;
+    public GameObject Choice2Panel;
+    public GameObject Choice3Panel;
+    public GameObject Choice4Panel;
+
+
+    public TMP_Text Choice1Label;
+    public TMP_Text Choice2Label;
+    public TMP_Text Choice3Label;
+    public TMP_Text Choice4Label;
+
     public bool testTrivia = false;
     public bool testEvent = false;
     public bool chooseCareer = false;
     public string selectedCareer = "Unemployed";
 
     private Tile currentTile; // Track the tile the player landed on
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+                              // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Awake()
     {
         GameManager.OnPropertyLandedOn += PropertyLandedOn;
@@ -36,6 +50,15 @@ public class GameState : MonoBehaviour
             triviaLabel = triviaPanel.GetComponentInChildren<TMP_Text>(true);
         if (!eventLabel && eventPanel)
             eventLabel = eventPanel.GetComponentInChildren<TMP_Text>(true);
+            
+        if (!Choice1Label && Choice1Panel)
+            Choice1Label = Choice1Panel.GetComponentInChildren<TMP_Text>(true);
+        if (!Choice2Label && Choice2Panel)
+            Choice2Label = Choice2Panel.GetComponentInChildren<TMP_Text>(true);
+        if (!Choice3Label && Choice3Panel)
+            Choice3Label = Choice3Panel.GetComponentInChildren<TMP_Text>(true);
+        if (!Choice4Label && Choice4Panel)
+            Choice4Label = Choice4Panel.GetComponentInChildren<TMP_Text>(true);
     }
 
     public void Update()
@@ -58,16 +81,16 @@ public class GameState : MonoBehaviour
 
         if (testTrivia)
         {
-            testTrivia = false;
             TriviaLandedOn();
             Debug.Log("testtrivia triggered");
+            testTrivia = false;
         }
 
         if (testEvent)
         {
-            testEvent = false;
             EventLandedOn();
             Debug.Log("testevent triggered");
+            testEvent = false;
         }
     }
 
@@ -176,6 +199,23 @@ public class GameState : MonoBehaviour
             if (triviaPanel) triviaLabel = triviaPanel.GetComponentInChildren<TMP_Text>(true);
         }
         if (!triviaLabel) { Debug.LogError("[GameState] triviaLabel not assigned."); return; }
+
+        var panels = new GameObject[] { Choice1Panel, Choice2Panel, Choice3Panel, Choice4Panel };
+        var labels = new TMP_Text[]  { Choice1Label, Choice2Label, Choice3Label, Choice4Label };
+
+        for (int i = 0; i < labels.Length; i++)
+        {
+            if (!labels[i] && !panels[i])
+            {
+                labels[i] = panels[i].GetComponentInChildren<TMP_Text>(true);
+            }
+        }
+
+        for (int i = 0; i < labels.Length; i++)
+        {
+            labels[i].text = q.options[i];
+        }
+
         triviaLabel.text = q.question;
         Debug.Log("[GameState] Trivia set: " + triviaLabel.text);
     }
@@ -186,7 +226,8 @@ public class GameState : MonoBehaviour
         var repo = JobsDataRepository.Instance;
         CommunityChestCard card = repo != null ? repo.GetRandomEvent(player.profession) : null;
         if (card == null) { Debug.LogWarning("[GameState] No event available."); return; }
-        if (!eventLabel) {
+        if (!eventLabel)
+        {
             if (eventPanel) eventLabel = eventPanel.GetComponentInChildren<TMP_Text>(true);
         }
         if (!eventLabel) { Debug.LogError("[GameState] eventLabel not assigned."); return; }
