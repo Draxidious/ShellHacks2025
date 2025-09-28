@@ -12,7 +12,6 @@ public class BoardManager : MonoBehaviour
 
     public GameObject PieceObjects;
     public List<Tile> Tiles;
-
     #endregion
 
     #region Player variables
@@ -144,10 +143,12 @@ public class BoardManager : MonoBehaviour
             case TileType.Trivia:
                 Debug.Log($"Player {playerIndex + 1} landed on a Trivia tile.");
                 GameManager.OnTriviaLandedOn?.Invoke();
+                GameManager.Instance.NextTurn();
                 break;
             case TileType.Event:
                 Debug.Log($"Player {playerIndex + 1} landed on an Event tile.");
                 GameManager.OnEventLandedOn?.Invoke();
+                GameManager.Instance.NextTurn();
                 break;
             case TileType.Start:
                 GameManager.Instance.NextTurn();

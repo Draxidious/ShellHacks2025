@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
                 GameObject playerObj = new GameObject($"Player_{i + 1}");
                 Player newPlayer = playerObj.AddComponent<Player>();
                 newPlayer.id = i + 1;
-                newPlayer.profession = "Plumber";
+                newPlayer.profession = "Unemployed";
                 newPlayer.playerName = $"Player {i + 1}";
                 newPlayer.money = 0;
                 AddPlayer(newPlayer);

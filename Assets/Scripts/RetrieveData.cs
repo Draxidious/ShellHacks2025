@@ -106,11 +106,6 @@ public class JobsDataRepository : MonoBehaviour
             _triviaByJob[key] = trList;
         }
 
-        Debug.Log($"[JobsDataRepository] Loaded {_eventsByJob.Count} professions from JSON.");
-        if (root.Jobs.Count > 0 && root.Jobs[0].Trivia != null && root.Jobs[0].Trivia.Count > 0)
-        {
-            Debug.Log($"First profession: {root.Jobs[0].Name}, First trivia: {root.Jobs[0].Trivia[0].Question}");
-        }
     }
 
     private static CardAction MapAction(string typeString)
