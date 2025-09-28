@@ -13,6 +13,7 @@ public class PlayerTile : MonoBehaviour
     void Awake()
     {
         GameManager.OnPlayerAdded += PlayerAdded;
+        GameManager.OnMoneyUpdated += MoneyUpdated;
     }
 
     void PlayerAdded(Player player)
@@ -24,6 +25,16 @@ public class PlayerTile : MonoBehaviour
             playerName.text = player.playerName;
             money.text = $"Money: ${player.money}";
             profession.text = $"Profession: {player.profession}";
+        }
+    }
+
+    void MoneyUpdated(int playerId, int amount)
+    {
+        int playerIndex = playerId - 1;
+        if (playerIndex == tileIndex)
+        {
+            Player player = GameManager.players[playerIndex];
+            money.text = $"Money: ${player.money}";
         }
     }
     

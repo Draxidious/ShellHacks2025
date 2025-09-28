@@ -25,13 +25,19 @@ public class BoardManager : MonoBehaviour
     void Start()
     {
         GameManager.OnPlayerAdded += AddPlayerPiece;
-        Debug.Log("BoardManager Start");
+
+        StartCoroutine(InitBoard());
+    }
+
+    private System.Collections.IEnumerator InitBoard()
+    {
+        yield return new WaitForSeconds(3f); // wait 3 seconds
         GetTilesAndPieces();
+
         for (int i = 0; i < playerPieces.Count; i++)
         {
             MovePlayerPiece(i, 0);
         }
-        
     }
 
     private void Awake()
@@ -100,6 +106,27 @@ public class BoardManager : MonoBehaviour
             )
         );
         playerPieces[playerIndex].transform.position = targetPosition;
+        switch (Tiles[newPosition].tileType)
+        {
+            case TileType.Property:
+                Debug.Log($"Player {playerIndex + 1} landed on a Property tile.");
+                GameManager.OnPropertyLandedOn?.Invoke(Tiles[newPosition]);
+                break;
+            case TileType.Trivia:
+                Debug.Log($"Player {playerIndex + 1} landed on a Trivia tile.");
+                GameManager.OnTriviaLandedOn?.Invoke();
+                break;
+            case TileType.Event:
+                Debug.Log($"Player {playerIndex + 1} landed on an Event tile.");
+                GameManager.OnEventLandedOn?.Invoke();
+                break;
+            case TileType.Start:
+                GameManager.Instance.NextTurn();
+                break;
+            default:
+                Debug.Log($"Player {playerIndex + 1} landed on a tile of type {Tiles[newPosition].tileType}.");
+                break;
+        }
     }
 
     private void HandlePlayerMoveRequested(int playerIndex, int boardSpaceIndex)

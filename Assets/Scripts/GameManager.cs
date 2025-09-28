@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     };
 
     public const int maxPlayers = 4;
-    
+
     [Header("Players")]
     [Tooltip("Basic player data for up to 4 players. OnValidate will ensure there are 4 entries.")]
     public static List<Player> players = new List<Player>();
@@ -28,6 +28,10 @@ public class GameManager : MonoBehaviour
     public static Action<Player> OnPlayerAdded;
     public static Action OnTurnChanged;
     public static Action<int> OnDiceRolled;
+    public static Action<Tile> OnPropertyLandedOn;
+    public static Action OnTriviaLandedOn;
+    public static Action OnEventLandedOn;
+    public static Action<int, int> OnMoneyUpdated;
 
     public bool dontDestroyOnLoad = false;
 
@@ -61,18 +65,18 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < maxPlayers; i++)
             {
-                Player newPlayer = new Player
-                {
-                    id = i + 1,
-                    profession = "Unemployed",
-                    playerName = $"Player {i + 1}",
-                    money = 0
-                };
+                GameObject playerObj = new GameObject($"Player_{i + 1}");
+                Player newPlayer = playerObj.AddComponent<Player>();
+                newPlayer.id = i + 1;
+                newPlayer.profession = "Unemployed";
+                newPlayer.playerName = $"Player {i + 1}";
+                newPlayer.money = 0;
                 AddPlayer(newPlayer);
+                UpdatePlayerMoney(newPlayer.id, 200);
             }
-            
+
         }
-        
+
     }
 
     // We want to start the next turn after everything is awake
@@ -87,8 +91,22 @@ public class GameManager : MonoBehaviour
 
     public void AddPlayer(Player newPlayer)
     {
-        OnPlayerAdded?.Invoke(newPlayer);
         players.Add(newPlayer);
+        OnPlayerAdded?.Invoke(newPlayer);
+    }
+
+    public void UpdatePlayerMoney(int playerId, int amount)
+    {
+        Player player = GetPlayer(playerId);
+        if (player != null)
+        {
+            player.money += amount;
+            OnMoneyUpdated?.Invoke(playerId, amount);
+        }
+        else
+        {
+            Debug.LogError($"Player with ID {playerId} not found.");
+        }
     }
 
     public void DiceRolled(int sum)
@@ -116,12 +134,12 @@ public class GameManager : MonoBehaviour
 
     #region Public API
     // Public API: get player by id (1-based)
-    public Player GetPlayer(int id)
+    public static Player GetPlayer(int id)
     {
         if (id < 1 || id > players.Count) return null;
         return players[id - 1];
     }
-    
+
     #endregion Public API
 
     [ContextMenu("Print Players To Console")]
