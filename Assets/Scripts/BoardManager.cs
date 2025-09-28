@@ -277,7 +277,6 @@ public class BoardManager : MonoBehaviour
             case TileType.Trivia:
                 Debug.Log($"Player {playerIndex + 1} landed on a Trivia tile.");
                 GameManager.OnTriviaLandedOn?.Invoke();
-                GameManager.Instance.NextTurn();
                 break;
             case TileType.Event:
                 Debug.Log($"Player {playerIndex + 1} landed on an Event tile.");

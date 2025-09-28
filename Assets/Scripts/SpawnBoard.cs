@@ -35,7 +35,7 @@ public class SpawnBoard : NetworkBehaviour
         {
             if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
-                Debug.Log("Pressed");
+                //Debug.Log("Pressed");
                 return true;
             }
             else if (rightHand && rightHand.GetFingerIsPinching(OVRHand.HandFinger.Index))
@@ -54,13 +54,13 @@ public class SpawnBoard : NetworkBehaviour
         {
             if (!isPlaced)
             {
-                Debug.Log("Initial spawn");
+                //Debug.Log("Initial spawn");
                 RequestSpawnServerRpc(pos, rot);
                 isPlaced = true;
             }
             else
             {
-                Debug.Log("Moved spawn");
+                //Debug.Log("Moved spawn");
                 RequestMoveServerRPC(pos, rot);
             }
         }
@@ -80,7 +80,7 @@ public class SpawnBoard : NetworkBehaviour
             toPlayer.y = 0f;
             toPlayer.Normalize();
             rot = Quaternion.LookRotation(toPlayer, Vector3.up);
-            Debug.Log("Raycast");
+            //Debug.Log("Raycast");
             return true;
         }
 
@@ -91,14 +91,14 @@ public class SpawnBoard : NetworkBehaviour
     private void RequestSpawnServerRpc(Vector3 position, Quaternion rotation, ServerRpcParams rpc = default)
     {
         //placedBoard.Spawn(true);
-        Debug.Log("Actually moved locations");
-        placedBoard.transform.SetPositionAndRotation(position, rotation);
+        //Debug.Log("Actually moved locations");
+        //placedBoard.transform.SetPositionAndRotation(position, rotation);
     }
     
     [ServerRpc]
     private void RequestMoveServerRPC(Vector3 position, Quaternion rotation, ServerRpcParams rpc = default)
     {
-        Debug.Log("Also Actually moved locations");
-        placedBoard.transform.SetPositionAndRotation(position, rotation);
+        //Debug.Log("Also Actually moved locations");
+        //placedBoard.transform.SetPositionAndRotation(position, rotation);
     }
 }

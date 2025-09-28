@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
                 newPlayer.playerName = $"Player {i + 1}";
                 newPlayer.money = 0;
                 AddPlayer(newPlayer);
-                UpdatePlayerMoney(newPlayer.id, 200);
+                UpdatePlayerMoney(newPlayer.id, 350);
             }
 
         }

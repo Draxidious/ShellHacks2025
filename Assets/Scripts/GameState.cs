@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameState : MonoBehaviour
@@ -16,6 +17,12 @@ public class GameState : MonoBehaviour
     public bool gameOver = false;
 
     public GameObject triviaPanel;
+
+    public TMP_Text option1;
+    public TMP_Text option2;
+    public TMP_Text option3;
+    public TMP_Text option4;
+
     public GameObject eventPanel;
     public TMP_Text triviaLabel;
     public TMP_Text eventLabel;
@@ -35,6 +42,7 @@ public class GameState : MonoBehaviour
     public bool testEvent = false;
     public bool chooseCareer = false;
     public string selectedCareer = "Unemployed";
+    public int correctAnswer = -1;
 
     private Tile currentTile; // Track the tile the player landed on
                               // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -50,7 +58,7 @@ public class GameState : MonoBehaviour
             triviaLabel = triviaPanel.GetComponentInChildren<TMP_Text>(true);
         if (!eventLabel && eventPanel)
             eventLabel = eventPanel.GetComponentInChildren<TMP_Text>(true);
-            
+
         if (!Choice1Label && Choice1Panel)
             Choice1Label = Choice1Panel.GetComponentInChildren<TMP_Text>(true);
         if (!Choice2Label && Choice2Panel)
@@ -116,7 +124,7 @@ public class GameState : MonoBehaviour
         rollDicePanel.SetActive(false);
         payThePricePanel.SetActive(false);
         gameWinPanel.SetActive(true);
-        gameWinText.text = $"{GameManager.GetPlayer(playerId).playerName} wins the game!";  
+        gameWinText.text = $"{GameManager.GetPlayer(playerId).playerName} wins the game!";
     }
 
     public void PropertyLandedOn(Tile tile)
@@ -146,7 +154,7 @@ public class GameState : MonoBehaviour
             GameManager.Instance.UpdatePlayerMoney(currentPlayer.id, -(int)rentAmount);
             GameManager.Instance.UpdatePlayerMoney(owner.id, (int)rentAmount);
             Debug.Log($"{currentPlayer.playerName} paid ${rentAmount} in rent to {owner.playerName} for landing on {tile.tileName}.");
-            if(gameOver) return;
+            if (gameOver) return;
             StartCoroutine(ShowPricePaidPanel());
             return;
         }
@@ -190,18 +198,24 @@ public class GameState : MonoBehaviour
     }
     public void TriviaLandedOn()
     {
+        Choice1Panel.SetActive(true);
+        Choice2Panel.SetActive(true);
+        Choice3Panel.SetActive(true);
+        Choice4Panel.SetActive(true);
         Debug.Log("Trivia Landed On - TileManager");
         Player player = GameManager.players[GameManager.Instance.currentTurnPlayerIndex];
         var repo = JobsDataRepository.Instance;
         TriviaQuestion q = repo != null ? repo.GetRandomTrivia(player.profession) : null;
+
         if (q == null) { Debug.LogWarning("[GameState] No trivia available."); return; }
-        if (!triviaLabel) {
+        if (!triviaLabel)
+        {
             if (triviaPanel) triviaLabel = triviaPanel.GetComponentInChildren<TMP_Text>(true);
         }
         if (!triviaLabel) { Debug.LogError("[GameState] triviaLabel not assigned."); return; }
 
         var panels = new GameObject[] { Choice1Panel, Choice2Panel, Choice3Panel, Choice4Panel };
-        var labels = new TMP_Text[]  { Choice1Label, Choice2Label, Choice3Label, Choice4Label };
+        var labels = new TMP_Text[] { Choice1Label, Choice2Label, Choice3Label, Choice4Label };
 
         for (int i = 0; i < labels.Length; i++)
         {
@@ -214,8 +228,12 @@ public class GameState : MonoBehaviour
         for (int i = 0; i < labels.Length; i++)
         {
             labels[i].text = q.options[i];
+            if (q.options[i] == q.answer)
+            {
+                correctAnswer = i;
+            }
         }
-
+        
         triviaLabel.text = q.question;
         Debug.Log("[GameState] Trivia set: " + triviaLabel.text);
     }
@@ -233,5 +251,19 @@ public class GameState : MonoBehaviour
         if (!eventLabel) { Debug.LogError("[GameState] eventLabel not assigned."); return; }
         eventLabel.text = card.description;
         Debug.Log("[GameState] Event set: " + eventLabel.text);
+    }
+
+    public void OptionSelected(int index)
+    {
+        if (index == correctAnswer)
+        {
+            GameManager.players[GameManager.Instance.currentTurnPlayerIndex].money += 100;
+            GameManager.OnMoneyUpdated?.Invoke(GameManager.Instance.currentTurnPlayerIndex + 1, 100);
+        }
+        Choice1Panel.SetActive(false);
+        Choice2Panel.SetActive(false);
+        Choice3Panel.SetActive(false);
+        Choice4Panel.SetActive(false);
+        GameManager.Instance.NextTurn();
     }
 }
