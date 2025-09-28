@@ -1,6 +1,10 @@
 fileFormatVersion: 2
-guid: da85c5b3a06b71648bcca27bc7fee2a5
+<<<<<<<< HEAD:Assets/Dice_6.meta
+guid: b1bb07b5f82baf14a85d5a0073358749
 folderAsset: yes
+========
+guid: 6e7b143ada8394bbea2d2b6b529910ee
+>>>>>>>> e69bee0 (reset scenes):Assets/_Recovery/0 (10).unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

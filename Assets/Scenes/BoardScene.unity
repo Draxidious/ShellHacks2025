@@ -1145,6 +1145,7 @@ GameObject:
   - component: {fileID: 879826591}
   - component: {fileID: 879826590}
   - component: {fileID: 879826589}
+  - component: {fileID: 879826592}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -1244,6 +1245,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 879826587}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &879826592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879826587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b060dfb18e9ffd34e9d02bd68d31df51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DiceRoller
+  die1: {fileID: 0}
+  die2: {fileID: 0}
+  testRoll: 1
+  liftHeight: 1
+  rollDuration: 0.5
+  spinSpeed: 1800
+  sum: 0
 --- !u!1 &904923874
 GameObject:
   m_ObjectHideFlags: 0
