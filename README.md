@@ -3,7 +3,7 @@
 ## 🎲 Making careers fun for everyone
 Have you ever been asked, "What would you like to be when you grow up?" This question can be daunting, and we all felt that we had a hard time answering this as kids. We wanted to bring an interesting twist to career education, to try and make it more interesting and engaging for everyone. cAReeropoly allows its players to learn more about potential careers paths while enjoying a game of Monopoly.
 
-##💡 What it does
+## 💡 What it does
 cAReeropoly is an augmented reality application which simulates a game of Monopoly, but with a unique twist. Throughout the game, there are trivia questions and facts about a chosen career path, which lets users learn a bit more about that path while also getting to enjoy a game of Monopoly with their friends. cAReeropoly is multi-player, bringing even more fun to the job exploration.
 
 ## 🛠️ How we built it
