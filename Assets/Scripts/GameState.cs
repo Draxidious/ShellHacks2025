@@ -13,6 +13,11 @@ public class GameState : MonoBehaviour
     public bool declineProperty = false;
 
     public bool gameOver = false;
+    public GameObject triviaPanel;
+    public GameObject eventPanel;
+    public bool testTrivia = false;
+
+    public bool testEvent = false;
 
     private Tile currentTile; // Track the tile the player landed on
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,6 +27,8 @@ public class GameState : MonoBehaviour
         GameManager.OnTriviaLandedOn += TriviaLandedOn;
         GameManager.OnEventLandedOn += EventLandedOn;
         GameManager.OnGameWin += HandleGameWin;
+        triviaPanel.SetActive(false);
+        eventPanel.SetActive(false);
     }
 
     void HandleGameWin(int playerId)
@@ -31,7 +38,7 @@ public class GameState : MonoBehaviour
         rollDicePanel.SetActive(false);
         payThePricePanel.SetActive(false);
         gameWinPanel.SetActive(true);
-        gameWinText.text = $"{GameManager.GetPlayer(playerId).playerName} wins the game!";
+        gameWinText.text = $"{GameManager.GetPlayer(playerId).playerName} wins the game!";  
     }
 
     public void PropertyLandedOn(Tile tile)
@@ -92,6 +99,18 @@ public class GameState : MonoBehaviour
             PropertyDeclined();
             declineProperty = false;
         }
+
+        if (testTrivia)
+        {
+            testTrivia = false;
+            StartCoroutine(ShowTriviaPanel());
+        }
+
+        if (testEvent)
+        {
+            testEvent = false;
+            StartCoroutine(ShowEventPanel());
+        }
     }
 
     public void PropertyBought()
@@ -120,9 +139,25 @@ public class GameState : MonoBehaviour
     public void TriviaLandedOn()
     {
         Debug.Log("Trivia Landed On - TileManager");
+        triviaPanel.SetActive(true);
     }
     public void EventLandedOn()
     {
         Debug.Log("Event Landed On - TileManager");
+        eventPanel.SetActive(true);
+    }
+
+    private System.Collections.IEnumerator ShowTriviaPanel()
+    {
+        triviaPanel.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        triviaPanel.SetActive(false);
+    }
+
+    private System.Collections.IEnumerator ShowEventPanel()
+    {
+        eventPanel.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        eventPanel.SetActive(false);
     }
 }
