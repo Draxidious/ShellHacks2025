@@ -34,7 +34,10 @@ public class SpawnBoard : NetworkBehaviour
         try
         {
             if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+            {
+                Debug.Log("Pressed");
                 return true;
+            }
             else if (rightHand && rightHand.GetFingerIsPinching(OVRHand.HandFinger.Index))
                 return true;
         }
@@ -51,11 +54,13 @@ public class SpawnBoard : NetworkBehaviour
         {
             if (!isPlaced)
             {
+                Debug.Log("Initial spawn");
                 RequestSpawnServerRpc(pos, rot);
                 isPlaced = true;
             }
             else
             {
+                Debug.Log("Moved spawn");
                 RequestMoveServerRPC(pos, rot);
             }
         }
@@ -75,7 +80,7 @@ public class SpawnBoard : NetworkBehaviour
             toPlayer.y = 0f;
             toPlayer.Normalize();
             rot = Quaternion.LookRotation(toPlayer, Vector3.up);
-
+            Debug.Log("Raycast");
             return true;
         }
 
@@ -86,12 +91,14 @@ public class SpawnBoard : NetworkBehaviour
     private void RequestSpawnServerRpc(Vector3 position, Quaternion rotation, ServerRpcParams rpc = default)
     {
         //placedBoard.Spawn(true);
+        Debug.Log("Actually moved locations");
         placedBoard.transform.SetPositionAndRotation(position, rotation);
     }
     
     [ServerRpc]
     private void RequestMoveServerRPC(Vector3 position, Quaternion rotation, ServerRpcParams rpc = default)
     {
+        Debug.Log("Also Actually moved locations");
         placedBoard.transform.SetPositionAndRotation(position, rotation);
     }
 }
