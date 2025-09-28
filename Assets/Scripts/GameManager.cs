@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
 
         if (addTestPlayers)
         {
+            Debug.Log("Adding test players");
             for (int i = 0; i < maxPlayers; i++)
             {
                 GameObject playerObj = new GameObject($"Player_{i + 1}");
