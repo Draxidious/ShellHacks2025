@@ -177,9 +177,9 @@ MonoBehaviour:
         2}'
     - line: '|   - {fileID: 11400000, guid: 0a7307eee8df2404f82c393ae047fca7, type:
         2}'
-    - line: '|   - {fileID: 8860158354852369252, guid: 766ff27917cb5e74f8e4dbe104e76d00,
-        type: 2}'
     - line: '|   - {fileID: 6455825509589654273, guid: 38a4eee029157a44aa22e446a493b90a,
+        type: 2}'
+    - line: '|   - {fileID: 8860158354852369252, guid: 766ff27917cb5e74f8e4dbe104e76d00,
         type: 2}'
     - line: '|   metroInputSource: 0'
     - line: '|   wsaTransparentSwapchain: 0'
