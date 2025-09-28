@@ -14,6 +14,7 @@ public class PlayerTile : MonoBehaviour
     {
         GameManager.OnPlayerAdded += PlayerAdded;
         GameManager.OnMoneyUpdated += MoneyUpdated;
+        GameManager.OnProfessionUpdated += ProfessionUpdated;
     }
 
     void PlayerAdded(Player player)
@@ -24,7 +25,7 @@ public class PlayerTile : MonoBehaviour
             Components.SetActive(true);
             playerName.text = player.playerName;
             money.text = $"Money: ${player.money}";
-            profession.text = $"Profession: {player.profession}";
+            profession.text = $"Career: {player.profession}";
         }
     }
 
@@ -42,6 +43,19 @@ public class PlayerTile : MonoBehaviour
                 return;
             }
             money.text = $"Money: ${player.money}";
+        }
+    }
+
+    void ProfessionUpdated(int playerId, string newProfession)
+    {
+        int playerIndex = playerId - 1;
+        if (playerIndex == tileIndex)
+        {
+            Debug.Log($"Updating profession for player {playerId} to {newProfession}");
+            Player player = GameManager.players[playerIndex];
+            if (player == null) return;
+            player.profession = newProfession;
+            profession.text = $"Career: {newProfession}";
         }
     }
     

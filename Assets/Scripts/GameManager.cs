@@ -32,8 +32,8 @@ public class GameManager : MonoBehaviour
     public static Action OnTriviaLandedOn;
     public static Action OnEventLandedOn;
     public static Action<int, int> OnMoneyUpdated;
-
     public static Action<int> OnGameWin;
+    public static Action<int, string> OnProfessionUpdated;
 
     public bool dontDestroyOnLoad = false;
 

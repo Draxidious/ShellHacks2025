@@ -6,6 +6,7 @@ public class GameState : MonoBehaviour
     public GameObject buyPropertyPanel;
     public GameObject payThePricePanel;
     public GameObject rollDicePanel;
+    public GameObject chooseCareerPanel;
 
     public GameObject gameWinPanel;
     public TMP_Text gameWinText;
@@ -16,8 +17,9 @@ public class GameState : MonoBehaviour
     public GameObject triviaPanel;
     public GameObject eventPanel;
     public bool testTrivia = false;
-
     public bool testEvent = false;
+    public bool chooseCareer = false;
+    public string selectedCareer = "Unemployed";
 
     private Tile currentTile; // Track the tile the player landed on
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,6 +31,52 @@ public class GameState : MonoBehaviour
         GameManager.OnGameWin += HandleGameWin;
         triviaPanel.SetActive(false);
         eventPanel.SetActive(false);
+    }
+
+    public void Update()
+    {
+        if (chooseCareer)
+        {
+            ChooseCareer(selectedCareer);
+            chooseCareer = false;
+        }
+        if (buyProperty)
+        {
+            PropertyBought();
+            buyProperty = false;
+        }
+        else if (declineProperty)
+        {
+            PropertyDeclined();
+            declineProperty = false;
+        }
+
+        if (testTrivia)
+        {
+            testTrivia = false;
+            StartCoroutine(ShowTriviaPanel());
+        }
+
+        if (testEvent)
+        {
+            testEvent = false;
+            StartCoroutine(ShowEventPanel());
+        }
+    }
+
+    public void ChooseCareer(string career)
+    {
+        Player currentPlayer = GameManager.players[GameManager.Instance.currentTurnPlayerIndex];
+        if (currentPlayer == null) return;
+        GameManager.OnProfessionUpdated?.Invoke(currentPlayer.id, career);
+        Debug.Log($"Player chose career: {career}");
+        GameManager.Instance.NextTurn();
+        if (GameManager.Instance.currentTurnPlayerIndex == 0)
+        {
+            chooseCareerPanel.SetActive(false);
+            rollDicePanel.SetActive(true);
+        }
+        // Implement career selection logic here
     }
 
     void HandleGameWin(int playerId)
@@ -85,32 +133,6 @@ public class GameState : MonoBehaviour
         payThePricePanel.SetActive(false);
         rollDicePanel.SetActive(true);
         GameManager.Instance.NextTurn();
-    }
-
-    public void Update()
-    {
-        if (buyProperty)
-        {
-            PropertyBought();
-            buyProperty = false;
-        }
-        else if (declineProperty)
-        {
-            PropertyDeclined();
-            declineProperty = false;
-        }
-
-        if (testTrivia)
-        {
-            testTrivia = false;
-            StartCoroutine(ShowTriviaPanel());
-        }
-
-        if (testEvent)
-        {
-            testEvent = false;
-            StartCoroutine(ShowEventPanel());
-        }
     }
 
     public void PropertyBought()
