@@ -16,6 +16,8 @@ public class GameState : MonoBehaviour
     public bool gameOver = false;
     public GameObject triviaPanel;
     public GameObject eventPanel;
+    public TMP_Text triviaLabel;
+    public TMP_Text eventLabel;
     public bool testTrivia = false;
     public bool testEvent = false;
     public bool chooseCareer = false;
@@ -29,8 +31,11 @@ public class GameState : MonoBehaviour
         GameManager.OnTriviaLandedOn += TriviaLandedOn;
         GameManager.OnEventLandedOn += EventLandedOn;
         GameManager.OnGameWin += HandleGameWin;
-        triviaPanel.SetActive(false);
-        eventPanel.SetActive(false);
+
+        if (!triviaLabel && triviaPanel)
+            triviaLabel = triviaPanel.GetComponentInChildren<TMP_Text>(true);
+        if (!eventLabel && eventPanel)
+            eventLabel = eventPanel.GetComponentInChildren<TMP_Text>(true);
     }
 
     public void Update()
@@ -54,13 +59,15 @@ public class GameState : MonoBehaviour
         if (testTrivia)
         {
             testTrivia = false;
-            StartCoroutine(ShowTriviaPanel());
+            TriviaLandedOn();
+            Debug.Log("testtrivia triggered");
         }
 
         if (testEvent)
         {
             testEvent = false;
-            StartCoroutine(ShowEventPanel());
+            EventLandedOn();
+            Debug.Log("testevent triggered");
         }
     }
 
@@ -161,25 +168,29 @@ public class GameState : MonoBehaviour
     public void TriviaLandedOn()
     {
         Debug.Log("Trivia Landed On - TileManager");
-        ShowTriviaPanel();
+        Player player = GameManager.players[GameManager.Instance.currentTurnPlayerIndex];
+        var repo = JobsDataRepository.Instance;
+        TriviaQuestion q = repo != null ? repo.GetRandomTrivia(player.profession) : null;
+        if (q == null) { Debug.LogWarning("[GameState] No trivia available."); return; }
+        if (!triviaLabel) {
+            if (triviaPanel) triviaLabel = triviaPanel.GetComponentInChildren<TMP_Text>(true);
+        }
+        if (!triviaLabel) { Debug.LogError("[GameState] triviaLabel not assigned."); return; }
+        triviaLabel.text = q.question;
+        Debug.Log("[GameState] Trivia set: " + triviaLabel.text);
     }
     public void EventLandedOn()
     {
         Debug.Log("Event Landed On - TileManager");
-        ShowEventPanel();
-    }
-
-    private System.Collections.IEnumerator ShowTriviaPanel()
-    {
-        triviaPanel.SetActive(true);
-        yield return new WaitForSeconds(3f);
-        triviaPanel.SetActive(false);
-    }
-
-    private System.Collections.IEnumerator ShowEventPanel()
-    {
-        eventPanel.SetActive(true);
-        yield return new WaitForSeconds(3f);
-        eventPanel.SetActive(false);
+        Player player = GameManager.players[GameManager.Instance.currentTurnPlayerIndex];
+        var repo = JobsDataRepository.Instance;
+        CommunityChestCard card = repo != null ? repo.GetRandomEvent(player.profession) : null;
+        if (card == null) { Debug.LogWarning("[GameState] No event available."); return; }
+        if (!eventLabel) {
+            if (eventPanel) eventLabel = eventPanel.GetComponentInChildren<TMP_Text>(true);
+        }
+        if (!eventLabel) { Debug.LogError("[GameState] eventLabel not assigned."); return; }
+        eventLabel.text = card.description;
+        Debug.Log("[GameState] Event set: " + eventLabel.text);
     }
 }
