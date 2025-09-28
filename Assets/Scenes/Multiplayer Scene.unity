@@ -1642,6 +1642,7 @@ MonoBehaviour:
   movePlayerForward: 0
   addTestPlayers: 1
   currentTurnPlayerIndex: -1
+  sampleTriviaQuestion: 
 --- !u!1001 &318200304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2281,6 +2282,8 @@ MonoBehaviour:
   gameOver: 0
   triviaPanel: {fileID: 587119497}
   eventPanel: {fileID: 1222414225}
+  triviaLabel: {fileID: 0}
+  eventLabel: {fileID: 0}
   testTrivia: 0
   testEvent: 0
   chooseCareer: 0
@@ -7472,7 +7475,7 @@ PrefabInstance:
     - target: {fileID: 8033827375035805169, guid: c323045d571222d4e95cc6311956a635, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: b04ef3518b284024db4914df2514102a, type: 2}
+      objectReference: {fileID: 2100000, guid: 6028cf3c61985e54a91b2d6ccdc82060, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 9110276281282611866, guid: c323045d571222d4e95cc6311956a635, type: 3}
@@ -9025,9 +9028,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8033827375035805169, guid: c323045d571222d4e95cc6311956a635, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033827375035805169, guid: c323045d571222d4e95cc6311956a635, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: b04ef3518b284024db4914df2514102a, type: 2}
+      objectReference: {fileID: 2100000, guid: 6028cf3c61985e54a91b2d6ccdc82060, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 9110276281282611866, guid: c323045d571222d4e95cc6311956a635, type: 3}
@@ -11688,7 +11695,7 @@ PrefabInstance:
     - target: {fileID: 8033827375035805169, guid: c323045d571222d4e95cc6311956a635, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: b04ef3518b284024db4914df2514102a, type: 2}
+      objectReference: {fileID: 2100000, guid: 6028cf3c61985e54a91b2d6ccdc82060, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 9110276281282611866, guid: c323045d571222d4e95cc6311956a635, type: 3}
