@@ -20,16 +20,11 @@ public class CardUIManager : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("WE HAVE MADE IT HERE.");
         if (Instance == null) Instance = this; else { Destroy(gameObject); return; }
 
         GameManager.OnTriviaLandedOn += HandleTriviaLandedOn;
         GameManager.OnEventLandedOn  += HandleEventLandedOn;
-    }
-
-    void Start()
-    {
-        ShowRandomTriviaForCurrentPlayer(null);
-        ShowRandomEventForCurrentPlayer(null);
     }
 
     void OnDestroy()
