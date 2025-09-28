@@ -26,7 +26,7 @@ public class SpawnBoard : NetworkBehaviour
 
     private void Start()
     {
-        placedBoard.Despawn(false);
+        //placedBoard.Despawn(true);
     }
 
     private bool PrimaryActionPressed()
@@ -85,8 +85,7 @@ public class SpawnBoard : NetworkBehaviour
     [ServerRpc]
     private void RequestSpawnServerRpc(Vector3 position, Quaternion rotation, ServerRpcParams rpc = default)
     {
-
-        placedBoard.Spawn(true);
+        //placedBoard.Spawn(true);
         placedBoard.transform.SetPositionAndRotation(position, rotation);
     }
     
