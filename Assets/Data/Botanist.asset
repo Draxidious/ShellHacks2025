@@ -12,6 +12,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f06e1588a805e438b152310185844e, type: 3}
   m_Name: Botanist
   m_EditorClassIdentifier: Assembly-CSharp::JobData
-  jobName: 
-  communityChestCards: []
-  triviaQuestions: []
+  jobName: Botanist
+  communityChestCards:
+  - description: Plants need sunlight to grow. You teach this to kids. Collect $20
+      from each player"
+    action: 2
+    amount: 20
+  - description: The flower makes seeds. You discover a rare flower. Collect $100
+      from the bank
+    action: 1
+    amount: 100
+  - description: Fertilizer helps plants grow strong and healthy. You buy fertilizer
+      for your garden.
+    action: 2
+    amount: 50
+  - description: Plants breathe in carbon dioxide from the air. You forget to water
+      your plants.
+    action: 2
+    amount: 25
+  - description: Some plants are endangered and need protection. You save rare plants
+      from being destroyed.
+    action: 1
+    amount: 75
+  - description: Botanists study plants to learn how they grow and help the environment.
+      You travel to a rainforest to study trees. Advance to the nearest property.
+    action: 3
+    amount: 0
+  - description: Seeds can grow into new plants. You plant seeds in the school garden.
+      Collect $20 for teaching kids.
+    action: 0
+    amount: 20
+  - description: "Protected parks keep plants safe. You pick flowers where it\u2019s
+      not allowed. Pay a $100 fine."
+    action: 2
+    amount: 100
+  triviaQuestions:
+  - question: What do plants need to make food and grow?
+    answer: Sunlight
+  - question: Which part of a plant makes seeds?
+    answer: The flower
+  - question: 'True or False: Fertilizer helps plants grow.'
+    answer: True
+  - question: What gas do plants take in from the air?
+    answer: Carbon dioxide
+  - question: 'True or False: Botanists can help protect endangered plants.'
+    answer: True
+  - question: Why do botanists study plants?
+    answer: To learn how they grow and help the environment
+  - question: What grows into new plants?
+    answer: Seeds
+  - question: "True or False: It\u2019s okay to take flowers from protected areas."
+    answer: False

@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "ShellHacks2025.sln"
+    "dotnet.defaultSolution": "RealShellHacks2025.sln"
 }
