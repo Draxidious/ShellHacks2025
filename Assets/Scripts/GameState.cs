@@ -139,12 +139,12 @@ public class GameState : MonoBehaviour
     public void TriviaLandedOn()
     {
         Debug.Log("Trivia Landed On - TileManager");
-        triviaPanel.SetActive(true);
+        ShowTriviaPanel();
     }
     public void EventLandedOn()
     {
         Debug.Log("Event Landed On - TileManager");
-        eventPanel.SetActive(true);
+        ShowEventPanel();
     }
 
     private System.Collections.IEnumerator ShowTriviaPanel()

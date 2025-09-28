@@ -95,6 +95,10 @@ PrefabInstance:
       propertyPath: tileType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5310950883181548116, guid: c323045d571222d4e95cc6311956a635, type: 3}
+      propertyPath: ownerText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5898658435104432418, guid: c323045d571222d4e95cc6311956a635, type: 3}
       propertyPath: m_Name
       value: Trivia Tile
@@ -147,6 +151,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 4414076294348384124, guid: c323045d571222d4e95cc6311956a635, type: 3}
     - {fileID: 4628737167427321822, guid: c323045d571222d4e95cc6311956a635, type: 3}
+    - {fileID: 873560245127499907, guid: c323045d571222d4e95cc6311956a635, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6623878558962678340, guid: c323045d571222d4e95cc6311956a635, type: 3}
       insertIndex: -1

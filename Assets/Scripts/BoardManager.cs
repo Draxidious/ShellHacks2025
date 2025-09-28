@@ -120,6 +120,12 @@ public class BoardManager : MonoBehaviour
         }
         int currentPosition = GameManager.players[playerIndex].currentTileIndex;
         int newPosition = (currentPosition + spaceMovement) % Tiles.Count;
+        if(newPosition < currentPosition)
+        {
+            // Passed Start tile
+            GameManager.Instance.UpdatePlayerMoney(playerIndex + 1, 100); // +1 because playerId is index + 1
+            Debug.Log($"Player {playerIndex + 1} passed Start and collected $100.");
+        }
         GameManager.players[playerIndex].currentTileIndex = newPosition;
 
         Vector3 targetPosition = Tiles[newPosition].GetPiecePlacementPosition(playerIndex);
@@ -144,6 +150,9 @@ public class BoardManager : MonoBehaviour
                 GameManager.OnEventLandedOn?.Invoke();
                 break;
             case TileType.Start:
+                GameManager.Instance.NextTurn();
+                break;
+            case TileType.Corner:
                 GameManager.Instance.NextTurn();
                 break;
             default:

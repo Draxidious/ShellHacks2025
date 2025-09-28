@@ -7,6 +7,7 @@ public enum TileType
     Property,
     Trivia,
     Event,
+    Corner,
 }
 public class Tile : MonoBehaviour
 {
