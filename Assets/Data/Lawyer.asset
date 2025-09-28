@@ -12,6 +12,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f06e1588a805e438b152310185844e, type: 3}
   m_Name: Lawyer
   m_EditorClassIdentifier: Assembly-CSharp::JobData
-  jobName: 
-  communityChestCards: []
-  triviaQuestions: []
+  jobName: Lawyer
+  communityChestCards:
+  - description: Lawyers study laws to help people in court. You spend time learning
+      new laws. Pay $30 for books.
+    action: 2
+    amount: 30
+  - description: Lawyers argue cases in the courtroom. You win a big case. Collect
+      $30 from each player.
+    action: 0
+    amount: 30
+  - description: Lawyers file important papers called court filings. You pay for
+      filing fees. Pay $30.
+    action: 2
+    amount: 30
+  - description: Respecting the judge is important for lawyers. You show disrespect
+      and get fined. Pay $25.
+    action: 2
+    amount: 25
+  - description: Lawyers can win awards for providing volunteer legal services to
+      the poor and disadvantaged. You earn a Pro Bono Publico Award. Collect $200.
+    action: 1
+    amount: 200
+  - description: Some lawyers work for free to help people in need called Pro Bono.
+      A grateful client gives you a gift. Collect $50.
+    action: 1
+    amount: 50
+  - description: Lawyers give advice to people who need help with the law. You give
+      advice to a friend. Collect $20.
+    action: 1
+    amount: 20
+  - description: A lawyer who breaks courtroom rules is not following the rules.
+      You break the rules. Pay a $90 fine.
+    action: 2
+    amount: 90
+  triviaQuestions:
+  - question: 'What do lawyers study to help people in court? '
+    answer: Laws
+  - question: Where do lawyers argue cases?
+    answer: The courtroom
+  - question: What papers do lawyers file in court?
+    answer: Court filings
+  - question: Who must lawyers respect in the courtroom?
+    answer: The judge
+  - question: What is the Pro Bono Publico Award
+    answer: An award for providing volunteer legal services to the poor and disadvantaged.
+  - question: What is it called when lawyers help people for free?
+    answer: Pro bono work
+  - question: What do lawyers give to people who need help?
+    answer: Advice
+  - question: 'True or False: Lawyers must follow courtroom rules.'
+    answer: True
