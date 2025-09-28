@@ -43,6 +43,8 @@ public class BoardManager : MonoBehaviour
     private void Awake()
     {
         GameManager.OnDiceRolled += HandleDiceRolled;
+        GameManager.OnMoneyUpdated += HandleBankruptcy;
+
         if (Instance == null)
         {
             Instance = this;
@@ -50,6 +52,27 @@ public class BoardManager : MonoBehaviour
         else if (Instance != this)
         {
             Destroy(gameObject);
+        }
+    }
+
+    public void HandleBankruptcy(int playerId, int amount)
+    {
+        int playerIndex = playerId - 1;
+        Player player = GameManager.players[playerIndex];
+        if (player == null) return;
+        if (player.money < 0)
+        {
+            Debug.Log($"Player {playerIndex} is bankrupt and removed from the game.");
+            playerPieces[playerIndex].SetActive(false);
+
+            foreach (Tile tile in Tiles)
+            {
+                if (tile.tileType == TileType.Property && tile.playerOwnerId == playerId)
+                {
+                    tile.setOwner(-1);
+                    Debug.Log($"Released ownership of {tile.tileName} from Player {playerId}");
+                }
+            }
         }
     }
 
@@ -151,9 +174,16 @@ public class BoardManager : MonoBehaviour
 
         // Get all player pieces in children of PieceObjects
         playerPieces = new List<GameObject>();
+        int count = 0;
         foreach (Transform child in PieceObjects.transform)
         {
+            count++;
+            child.gameObject.SetActive(true);
             playerPieces.Add(child.gameObject);
+            if(GameManager.players.Count == count)
+            {
+                break;
+            }
         }
     }
 }

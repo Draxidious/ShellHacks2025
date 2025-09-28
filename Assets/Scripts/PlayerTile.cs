@@ -34,6 +34,13 @@ public class PlayerTile : MonoBehaviour
         if (playerIndex == tileIndex)
         {
             Player player = GameManager.players[playerIndex];
+            if (player == null) return;
+            if (player.money < 0)
+            {
+                Components.SetActive(false);
+                player.isBankrupt = true;
+                return;
+            }
             money.text = $"Money: ${player.money}";
         }
     }

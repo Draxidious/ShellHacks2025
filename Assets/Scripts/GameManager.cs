@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
         "Doctor"
     };
 
-    public const int maxPlayers = 4;
+    public const int maxPlayers = 2;
 
     [Header("Players")]
     [Tooltip("Basic player data for up to 4 players. OnValidate will ensure there are 4 entries.")]
@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     public static Action OnTriviaLandedOn;
     public static Action OnEventLandedOn;
     public static Action<int, int> OnMoneyUpdated;
+
+    public static Action<int> OnGameWin;
 
     public bool dontDestroyOnLoad = false;
 
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
                 newPlayer.playerName = $"Player {i + 1}";
                 newPlayer.money = 0;
                 AddPlayer(newPlayer);
-                UpdatePlayerMoney(newPlayer.id, 200);
+                UpdatePlayerMoney(newPlayer.id, 100);
             }
 
         }
@@ -101,6 +103,32 @@ public class GameManager : MonoBehaviour
         if (player != null)
         {
             player.money += amount;
+            if (player.money < 0)
+            {
+                player.isBankrupt = true;
+                Debug.Log($"{player.playerName} is bankrupt!");
+                int count = 0;
+                foreach (var pl in players)
+                {
+                    if (pl.isBankrupt)
+                    {
+                        count++;
+                    }
+                }
+                if (count == players.Count - 1)
+                {
+                    foreach (var pl in players)
+                    {
+                        if (!pl.isBankrupt)
+                        {
+                            Debug.Log($"{pl.playerName} wins the game!");
+                            OnGameWin?.Invoke(pl.id);
+                            break;
+                        }
+                    }
+                }
+
+            }
             OnMoneyUpdated?.Invoke(playerId, amount);
         }
         else
@@ -118,6 +146,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("It is next turn");
         currentTurnPlayerIndex = (currentTurnPlayerIndex + 1) % players.Count;
+        while (players[currentTurnPlayerIndex].isBankrupt)
+        {
+            currentTurnPlayerIndex = (currentTurnPlayerIndex + 1) % players.Count;
+        }
         OnTurnChanged?.Invoke();
     }
 

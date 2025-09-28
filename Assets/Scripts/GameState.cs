@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class GameState : MonoBehaviour
@@ -6,8 +7,12 @@ public class GameState : MonoBehaviour
     public GameObject payThePricePanel;
     public GameObject rollDicePanel;
 
+    public GameObject gameWinPanel;
+    public TMP_Text gameWinText;
     public bool buyProperty = false;
     public bool declineProperty = false;
+
+    public bool gameOver = false;
 
     private Tile currentTile; // Track the tile the player landed on
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -16,34 +21,47 @@ public class GameState : MonoBehaviour
         GameManager.OnPropertyLandedOn += PropertyLandedOn;
         GameManager.OnTriviaLandedOn += TriviaLandedOn;
         GameManager.OnEventLandedOn += EventLandedOn;
+        GameManager.OnGameWin += HandleGameWin;
+    }
+
+    void HandleGameWin(int playerId)
+    {
+        gameOver = true;
+        buyPropertyPanel.SetActive(false);
+        rollDicePanel.SetActive(false);
+        payThePricePanel.SetActive(false);
+        gameWinPanel.SetActive(true);
+        gameWinText.text = $"{GameManager.GetPlayer(playerId).playerName} wins the game!";
     }
 
     public void PropertyLandedOn(Tile tile)
     {
+        int playerIndex = GameManager.Instance.currentTurnPlayerIndex;
+        if (playerIndex == tile.playerOwnerId - 1)
+        {
+            GameManager.Instance.NextTurn();
+            return;
+        }
         if (tile.playerOwnerId != -1)
         {
             Player currentPlayer = GameManager.players[GameManager.Instance.currentTurnPlayerIndex];
-            if (currentTile.tileType != TileType.Property || currentTile.playerOwnerId == 0 || currentTile.playerOwnerId == currentPlayer.id)
+            if (tile.tileType != TileType.Property || tile.playerOwnerId == 0 || tile.playerOwnerId == currentPlayer.id)
             {
                 Debug.Log("No rent to pay.");
                 return;
             }
-            Player owner = GameManager.GetPlayer(currentTile.playerOwnerId);
+            Player owner = GameManager.GetPlayer(tile.playerOwnerId);
+            Debug.Log($"Property owner ID: {tile.playerOwnerId}");
             if (owner == null)
             {
                 Debug.LogError("Property owner not found.");
                 return;
             }
-            float rentAmount = currentTile.rentAmount;
-            if (currentPlayer.money < rentAmount)
-            {
-                Debug.Log($"{currentPlayer.playerName} does not have enough money to pay rent of ${rentAmount} to {owner.playerName}.");
-                // Handle bankruptcy or other logic here
-                return;
-            }
-            GameManager.Instance.UpdatePlayerMoney(currentPlayer.id, - (int)rentAmount);
+            float rentAmount = tile.rentAmount;
+            GameManager.Instance.UpdatePlayerMoney(currentPlayer.id, -(int)rentAmount);
             GameManager.Instance.UpdatePlayerMoney(owner.id, (int)rentAmount);
-            Debug.Log($"{currentPlayer.playerName} paid ${rentAmount} in rent to {owner.playerName} for landing on {currentTile.tileName}.");
+            Debug.Log($"{currentPlayer.playerName} paid ${rentAmount} in rent to {owner.playerName} for landing on {tile.tileName}.");
+            if(gameOver) return;
             StartCoroutine(ShowPricePaidPanel());
             return;
         }
@@ -85,7 +103,7 @@ public class GameState : MonoBehaviour
         }
         buyPropertyPanel.SetActive(false);
         rollDicePanel.SetActive(true);
-        currentTile.setOwner(GameManager.Instance.currentTurnPlayerIndex);
+        currentTile.setOwner(GameManager.Instance.currentTurnPlayerIndex + 1);
 
         GameManager.Instance.UpdatePlayerMoney(GameManager.Instance.currentTurnPlayerIndex + 1, -currentTile.propertyCost);
         Debug.Log($"{GameManager.players[GameManager.Instance.currentTurnPlayerIndex].playerName} bought {currentTile.tileName} for ${currentTile.propertyCost}.");

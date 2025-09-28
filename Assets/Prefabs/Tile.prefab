@@ -857,7 +857,7 @@ MonoBehaviour:
   ownerText: {fileID: 3158927366665440012}
   tileName: Pharmacy
   propertyCost: 100
-  rentAmount: 100
+  rentAmount: 150
   playerOwnerId: -1
 --- !u!1 &6533900164688729045
 GameObject:

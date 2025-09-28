@@ -18,7 +18,6 @@ public class Tile : MonoBehaviour
     public string tileName = "Property";
     public int propertyCost = 100;
     public int rentAmount = 100;
-
     public int playerOwnerId = -1; // -1 means no owner
 
     public Vector3 GetPiecePlacementPosition(int playerIndex)
@@ -29,7 +28,13 @@ public class Tile : MonoBehaviour
 
     public void setOwner(int playerId)
     {
+        if (playerId < 0)
+        {
+            playerOwnerId = -1;
+            ownerText.text = "No Current Owner";
+            return;
+        }
         playerOwnerId = playerId;
-        ownerText.text = $"Owner: Player {playerId + 1}";
+        ownerText.text = $"Owner: Player {playerId}";
     }
 }

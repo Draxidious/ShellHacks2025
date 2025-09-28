@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     public string playerName = "Player";
     public string profession = "Unemployed";
     public float money = 0;
+    public bool isBankrupt = false;
 
     public int currentTileIndex = 0;
     // convenience
